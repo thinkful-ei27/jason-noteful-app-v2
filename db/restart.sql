@@ -1,7 +1,17 @@
--- psql -U dev -d noteful-app -f ./db/restart.sql
+-- -- psql -U dev -d noteful-app -f ./db/restart.sql
 
-DROP TABLE IF EXISTS folders;
+DROP TABLE IF EXISTS notes_tags;
 DROP TABLE IF EXISTS notes;
+DROP TABLE IF EXISTS folders;
+DROP TABLE IF EXISTS tags;
+
+
+CREATE TABLE tags (
+  id SERIAL PRIMARY KEY,
+  name text NOT NULL
+);
+
+INSERT INTO tags (name) VALUES ('work'), ('school'), ('family'), ('other');
 
 CREATE TABLE folders (
   id serial PRIMARY KEY,
@@ -14,6 +24,11 @@ CREATE TABLE notes (
   content text,
   created timestamp DEFAULT now(),
   folder_id int REFERENCES folders(id) ON DELETE SET NULL
+);
+
+CREATE TABLE notes_tags (
+  note_id INTEGER NOT NULL REFERENCES notes ON DELETE CASCADE,
+  tag_id INTEGER NOT NULL REFERENCES tags ON DELETE CASCADE
 );
 
 ALTER SEQUENCE folders_id_seq RESTART WITH 100;
@@ -76,3 +91,12 @@ INSERT INTO notes (title, content, folder_id) VALUES
     'Posuere sollicitudin aliquam ultrices sagittis orci a. Feugiat sed lectus vestibulum mattis ullamcorper velit. Odio pellentesque diam volutpat commodo sed egestas egestas fringilla. Velit egestas dui id ornare arcu odio. Molestie at elementum eu facilisis sed odio morbi. Tempor nec feugiat nisl pretium. At tempor commodo ullamcorper a lacus. Egestas dui id ornare arcu odio. Id cursus metus aliquam eleifend. Vitae sapien pellentesque habitant morbi tristique. Dis parturient montes nascetur ridiculus. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Aliquam faucibus purus in massa tempor nec feugiat nisl.',
     null
   );
+
+
+INSERT INTO notes_tags (note_id, tag_id) 
+VALUES (1001, 1), (1005, 2), (1003, 1), (1001, 2), (1004, 4), (1006, 2), (1001, 4), (1001007, 1);
+
+
+-- SELECT (id, title) FROM notes
+-- JOIN folders
+-- WHERE (notes.folder_id, folder.id);

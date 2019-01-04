@@ -1,8 +1,6 @@
 'use strict';
-
 const express = require('express');
 const knex = require('../knex');
-
 const router = express.Router();
 
 //Get All
@@ -16,14 +14,12 @@ router.get('/', (req, res, next) => {
   });
 
   router.get('/:id', (req, res, next) => {
-      const id = req.params.id;
-      knex
-      .select('id', 'name')
-      .from('folders')
-      .where('id', `${id}`)
-      .then(results => res.json(results[0]))
-      .catch( err => next( err ) );
-
+      const folderId = req.params.id;
+      knex.select('id', 'name')
+        .from('folders')
+        .where('id', folderId)
+        .then(results => res.json(results[0]))
+        .catch( err => next( err ) );
   });
 
 // PUT update

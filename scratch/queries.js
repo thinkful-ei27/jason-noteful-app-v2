@@ -45,13 +45,13 @@ const knex = require('../knex');
 // .then(results => console.log(results))
 // .catch( err => console.log( err ) );
 
-const deleteThis = 1007;
-knex('notes')
-.delete()
-.where('id', deleteThis)
-.debug(true)
-.then(results => console.log(results))
-.catch( err => console.log( err ) );
+// const deleteThis = 1007;
+// knex('notes')
+// .delete()
+// .where('id', deleteThis)
+// .debug(true)
+// .then(results => console.log(results))
+// .catch( err => console.log( err ) );
 
 knex
 .select('id', 'title')
