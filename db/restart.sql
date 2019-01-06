@@ -94,7 +94,7 @@ INSERT INTO notes (title, content, folder_id) VALUES
 
 
 INSERT INTO notes_tags (note_id, tag_id) 
-VALUES (1001, 1), (1005, 2), (1003, 1), (1001, 2), (1004, 4), (1006, 2), (1001, 4), (1001007, 1);
+VALUES (1001, 1), (1005, 2), (1003, 1), (1001, 2), (1004, 4), (1006, 2), (1001, 4), (1001, 1);
 
 
 -- SELECT (id, title) FROM notes
